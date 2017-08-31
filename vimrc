@@ -1,4 +1,4 @@
-"------------------------------------------------------------------------------
+"
 "    Description  : zhenlong's vimrc
 "    Author       : zhenlonghe@gmail.com
 "    License      : GPL v2.0
@@ -136,6 +136,7 @@ call plug#end()
         set backup
         set backupdir=~/.cache/backup
         set directory=~/.cache/backup
+        let g:netrw_home='~/.cache/'
         if has('persistent_undo')
             set undofile                " So is persistent undo ...
             set undodir=~/.cache/undo/
@@ -179,7 +180,8 @@ call plug#end()
     set scrolloff=3                     " Lines to keep above and below cursor
     set foldenable                      " Auto fold code
     set list
-    set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
+    "set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
+    set listchars=tab:\ \ ,trail:•,extends:#,nbsp:.
                                         " Highlight problematic whitespace
 "}
 
@@ -252,8 +254,15 @@ call plug#end()
 "}
 
 " Key (re)Mappings {
-    let mapleader   = ","
-    let g:mapleader = ","
+    let mapleader   = " "
+    let g:mapleader = " "
+
+    nm <leader>c      :bd<cr>
+    nm <leader>q      :bd!<cr>
+    nm <leader>x      :qa!<cr>
+    nm <leader>w      :w !sudo tee %<cr>
+    nm <leader>ft     :set ft=
+    nm <silent> <leader>n :ene<CR>
 
     " remap vim 0
     nm 0 ^
@@ -266,7 +275,7 @@ call plug#end()
     nm <c-k> :bp<cr>
     nm <tab> <c-w>w
 
-    nm <leader>ff  :call ToggleFullScreen()<cr>
+    nm <leader>f  :call ToggleFullScreen()<cr>
     nm <s-r> :call SwitchVimTopMostMode()<cr>
     nm <s-w> :call SetAlpha(-10)<cr>
     nm <s-e> :call SetAlpha(10)<cr>
@@ -293,17 +302,11 @@ call plug#end()
     " quick open vimrc in a new tab
     nm <leader>v  :e $MYVIMRC<cr>
     nm <leader>s  :source $MYVIMRC<cr>
-    nm <leader>0  :e ~/.vim/README.md<cr>
+    nm <leader>r  :e ~/.vim/README.md<cr>
 
     " mouse
     nm <leader>sv :set mouse=v<cr>
     nm <leader>sa :set mouse=a<cr>
-
-    nm <leader>w      :w !sudo tee %<cr>
-    nm <leader>q      :bd!<cr>
-    nm <space>w       :w<cr>
-    nm <space>c       :qa!<cr>
-    nm <space><space> :bd<cr>
 
     " Some helpers to edit mode
     cm %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
@@ -434,7 +437,7 @@ call plug#end()
             map <leader>a :VimwikiToggleListItem<CR>
             " diary map
             if WINDOWS()
-                let g:vimwiki_list = [{'path': 'D:\vimwiki',
+                let g:vimwiki_list = [{'path': 'D:\Dropbox\doc\vimwiki',
                             \"syntax": "markdown"}]
                 map <leader>m <ESC>ggO## <C-R>=strftime("%Y %m %d %A")<CR><ESC>
                             \ 5o<ESC>ggJj^i<tab>
@@ -662,7 +665,7 @@ call plug#end()
         endif
     endfunction
     command! -bang -nargs=* CycleNumbering :call CycleNumbering(<bang> <args>)
-    noremap <space>tn :call CycleNumbering()<CR>
+    noremap <leader>tn :call CycleNumbering()<CR>
 
     " Allow to trigger background
     function! ToggleBG()
