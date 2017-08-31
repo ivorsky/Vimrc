@@ -58,6 +58,7 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'tomasr/molokai'
 Plug 'w0ng/vim-hybrid'
 Plug 'joshdick/onedark.vim'
+Plug 'ajh17/Spacegray.vim'
 "}
 call plug#end()
 
