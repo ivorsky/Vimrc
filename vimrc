@@ -93,6 +93,7 @@ call plug#end()
     filetype plugin indent on           " Automatically detect file types.
     set mouse=a                         " Automatically enable mouse usage
     set mousehide                       " Hide the mouse cursor while typing
+    set noimdisable
     set encoding=utf-8
     scriptencoding utf-8
     set fileencodings=ucs-bom,utf-8,cp936,big5,euc-jp,gbk,euc-kr,utf-bom
@@ -199,7 +200,6 @@ call plug#end()
             set showtabline-=0
         elseif WINDOWS()
             set go=
-            set noimdisable
             color Tomorrow-Night
             set guifont=InputMono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
             "set guifontwide=YouYuan:h10:cGB2312
@@ -277,11 +277,12 @@ call plug#end()
     nm <c-k> :bp<cr>
     nm <tab> <c-w>w
 
-    nm <leader>f  :call ToggleFullScreen()<cr>
-    nm <s-r> :call SwitchVimTopMostMode()<cr>
-    nm <s-w> :call SetAlpha(-10)<cr>
-    nm <s-e> :call SetAlpha(10)<cr>
-
+    if WINDOWS()
+        nm <leader>f  :call ToggleFullScreen()<cr>
+        nm <s-r> :call SwitchVimTopMostMode()<cr>
+        nm <s-w> :call SetAlpha(-10)<cr>
+        nm <s-e> :call SetAlpha(10)<cr>
+    endif
 
     " Code folding options
     nm <leader>f0 :set foldlevel=0<CR>
@@ -658,10 +659,10 @@ call plug#end()
     function! CycleNumbering()
         if exists('+relativenumber')
             execute {
-             \ '00': 'set relativenumber   | set number',
-             \ '01': 'set norelativenumber | set number',
-             \ '10': 'set norelativenumber | set nonumber',
-             \ '11': 'set norelativenumber | set number' }[&number . &relativenumber]
+             \ '00': 'set norelativenumber   | set number',
+             \ '01': 'set norelativenumber   | set number',
+             \ '10': 'set relativenumber     | set number',
+             \ '11': 'set norelativenumber   | set nonumber' }[&number . &relativenumber]
         else
             " No relative numbering, just toggle numbers on and off.
             set number!
