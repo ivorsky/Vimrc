@@ -1,4 +1,4 @@
-This zhenlong's Vimrc.
+This ivorsky's Vimrc.
 =========================
 Here is my Vim configurations and plugins which I use in my daily job,
 and it compatibles with Windows, Linux and OS X. Vim-plug helps me manage all my plugins.
